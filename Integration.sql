@@ -84,28 +84,49 @@ CREATE OR REPLACE TABLE raw_events (
     remarks STRING
 );
 
+
+CREATE OR REPLACE PIPE pipe_raw_customers
+AUTO_INGEST = TRUE
+AS
 COPY INTO raw_customers
 FROM @bronze_stage/customers/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 
+CREATE OR REPLACE PIPE pipe_raw_employees
+AUTO_INGEST = TRUE
+AS
 COPY INTO raw_employees
 FROM @bronze_stage/employees/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 
+CREATE OR REPLACE PIPE pipe_raw_orders
+AUTO_INGEST = TRUE
+AS
 COPY INTO raw_orders
 FROM @bronze_stage/Orders/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 
+CREATE OR REPLACE PIPE pipe_raw_inventory
+AUTO_INGEST = TRUE
+AS
 COPY INTO raw_inventory
 FROM @bronze_stage/inventory/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 
+CREATE OR REPLACE PIPE pipe_raw_events
+AUTO_INGEST = TRUE
+AS
 COPY INTO raw_events
 FROM @bronze_stage/events/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
+
+SHOW PIPES;
+
+SELECT SYSTEM$PIPE_STATUS('pipe_raw_customers');
 
 LIST @bronze_stage/customers/;
 LIST @bronze_stage/employees/;
 LIST @bronze_stage/Orders/;
 LIST @bronze_stage/inventory/;
 LIST @bronze_stage/events/;
+
