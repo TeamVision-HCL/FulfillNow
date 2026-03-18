@@ -1,6 +1,6 @@
-# 📦 FulfillNow Data Engineering Pipeline (Snowflake)
+#  FulfillNow Data Engineering Pipeline (Snowflake)
 
-## 📌 Overview
+##  Overview
 This project implements an end-to-end ELT data pipeline in Snowflake using a Bronze–Silver–Gold architecture for fulfillment and logistics analytics.
 
 It processes data from:
@@ -12,21 +12,21 @@ It processes data from:
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 Raw Data → Bronze → Silver → Gold → KPIs / Analytics
 
-### 🔹 Bronze Layer
+### Bronze Layer
 - Raw data ingestion
 - No transformations
 - Data loaded from internal stage (CSV)
 
-### 🔹 Silver Layer
+### Silver Layer
 - Data cleaning & validation
 - Deduplication using ROW_NUMBER()
 - Business rules enforcement
 - Referential integrity
 
-### 🔹 Gold Layer
+### Gold Layer
 - KPI views
 - Analytical views
 - SCD Type-2 dimensions
@@ -34,7 +34,7 @@ Raw Data → Bronze → Silver → Gold → KPIs / Analytics
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 - Snowflake (SQL)
 - Streams & Tasks (Automation)
 - ELT Pipeline
@@ -43,7 +43,7 @@ Raw Data → Bronze → Silver → Gold → KPIs / Analytics
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 ### 1. Create Warehouse
 ```sql
@@ -80,16 +80,16 @@ COPY INTO raw_tables FROM @bronze_stage;
 
 ---
 
-## 📂 Data Pipeline
+##  Data Pipeline
 
-### 🔹 Bronze Tables
+### Bronze Tables
 - raw_customers
 - raw_orders
 - raw_employees
 - raw_inventory
 - raw_events
 
-### 🔹 Silver Tables
+### Silver Tables
 - customers_clean
 - orders_clean
 - employees_clean
@@ -105,16 +105,16 @@ COPY INTO raw_tables FROM @bronze_stage;
 
 ---
 
-## 🔹 Gold Layer
+## Gold Layer
 
-### 📊 KPI Views
+###  KPI Views
 - kpi_sla_score
 - kpi_throughput_rate
 - kpi_employee_productivity
 - kpi_inventory_availability
 - kpi_anomaly_rate
 
-### 📈 Analytical Views
+### Analytical Views
 - SLA Status
 - Event Sequence
 - Missing Shipments
@@ -122,7 +122,7 @@ COPY INTO raw_tables FROM @bronze_stage;
 
 ---
 
-## 🔄 SCD Type-2
+## SCD Type-2
 
 ### Tables
 - dim_customers
@@ -137,7 +137,7 @@ COPY INTO raw_tables FROM @bronze_stage;
 
 ---
 
-## ⚡ Automation
+## Automation
 
 ### Streams (CDC)
 - customers_stream
@@ -151,7 +151,7 @@ COPY INTO raw_tables FROM @bronze_stage;
 
 ---
 
-## 🚨 Data Quality
+## Data Quality
 
 ### Anomaly Detection
 Detects:
@@ -169,7 +169,7 @@ CALL detect_anomalies();
 
 ---
 
-## 🔐 Security
+## Security
 
 ### Data Masking
 - Email masking for non-admin users
@@ -179,7 +179,7 @@ CALL detect_anomalies();
 
 ---
 
-## 📊 KPIs
+##  KPIs
 
 | KPI | Description |
 |-----|------------|
@@ -191,7 +191,7 @@ CALL detect_anomalies();
 
 ---
 
-## 📈 Sample Queries
+## Sample Queries
 ```sql
 SELECT * FROM gold.kpi_sla_score;
 SELECT * FROM gold.kpi_employee_productivity;
@@ -200,13 +200,14 @@ SELECT * FROM gold.vw_sla_status;
 
 ---
 
-## 📁 Project Script
+## 
+Project Script
 See full SQL implementation in:
 project.sql
 
 ---
 
-## 🎯 Use Cases
+## Use Cases
 - Logistics Analytics
 - Warehouse Monitoring
 - SLA Tracking
@@ -215,7 +216,7 @@ project.sql
 
 ---
 
-## ⭐ Key Highlights
+## Key Highlights
 - End-to-End ELT Pipeline
 - Bronze–Silver–Gold Architecture
 - SCD Type-2 Implementation
