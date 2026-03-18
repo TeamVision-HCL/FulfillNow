@@ -29,64 +29,59 @@ FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 
 LIST @bronze_stage;
 
-CREATE TABLE raw_customers (
-    customer_id STRING PRIMARY KEY,
+CREATE OR REPLACE TABLE raw_customers (
+    customer_id INT,
     customer_name STRING,
     email STRING,
-    phone STRING,
+    phone NUMBER,
     city STRING,
     state STRING,
     segment STRING,
-    registration_date STRING
+    registration_date DATE
 );
 
-CREATE TABLE raw_employees (
-    employee_id STRING PRIMARY KEY,
+CREATE OR REPLACE TABLE raw_employees (
+    employee_id INT,
     name STRING,
     role STRING,
-    shift_start STRING,
-    shift_end STRING,
-    hub_id STRING,
-    join_date STRING,
+    shift_start TIMESTAMP,
+    shift_end TIMESTAMP,
+    hub_id INT,
+    join_date DATE,
     status STRING
 );
 
-CREATE TABLE raw_orders (
-    order_id STRING PRIMARY KEY,
-    customer_id STRING,
-    order_date STRING,
-    promised_ship_date STRING,
-    order_value STRING,
-    item_count STRING,
+CREATE OR REPLACE TABLE raw_orders (
+    order_id INT,
+    customer_id INT,
+    order_date DATE,
+    promised_ship_date DATE,
+    order_value NUMBER(10,2),
+    item_count INT,
     order_channel STRING,
-    priority_flag STRING,
-    status STRING,
-
-    FOREIGN KEY (customer_id) REFERENCES raw_customers(customer_id)
+    priority_flag INT,
+    status STRING
 );
 
-CREATE TABLE raw_inventory (
-    inventory_id STRING PRIMARY KEY,
-    sku_id STRING,
+CREATE OR REPLACE TABLE raw_inventory (
+    inventory_id INT,
+    sku_id INT,
     sku_name STRING,
     category STRING,
-    on_hand_qty STRING,
-    reserved_qty STRING,
-    reorder_level STRING,
-    last_restock_date STRING,
-    warehouse_id STRING
+    on_hand_qty INT,
+    reserved_qty INT,
+    reorder_level INT,
+    last_restock_date DATE,
+    warehouse_id INT
 );
 
-CREATE TABLE raw_events (
-    event_id STRING PRIMARY KEY,
-    order_id STRING,
-    employee_id STRING,
+CREATE OR REPLACE TABLE raw_events (
+    event_id INT,
+    order_id INT,
+    employee_id INT,
     event_type STRING,
-    event_time STRING,
-    remarks STRING,
-
-    FOREIGN KEY (order_id) REFERENCES raw_orders(order_id),
-    FOREIGN KEY (employee_id) REFERENCES raw_employees(employee_id)
+    event_time TIMESTAMP,
+    remarks STRING
 );
 
 COPY INTO raw_customers
@@ -108,3 +103,9 @@ FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
 COPY INTO raw_events
 FROM @bronze_stage/events/
 FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
+
+LIST @bronze_stage/customers/;
+LIST @bronze_stage/employees/;
+LIST @bronze_stage/Orders/;
+LIST @bronze_stage/inventory/;
+LIST @bronze_stage/events/;
