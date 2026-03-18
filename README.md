@@ -1,5 +1,5 @@
 #FulfillNow -a e-commerce fulfillment & warehousing operation                                   
-the platform integrates exactly 5 datasets
+the platform integrates exactly 5 datasets          
 1.orders -master,increment
 2.customers -master,increment
 3.warehouse employees -master,increment
